@@ -7,13 +7,7 @@ This CLI program emulates the basic functionality of the `ls` command found in U
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
-
-- Rust programming language: [Installation guide for Rust](https://www.rust-lang.org/tools/install)
-
 ### Installing
-
-First, clone the repository to your local machine:
 
 ```bash
 cargo install ...
