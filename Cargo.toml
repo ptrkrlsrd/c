@@ -1,7 +1,7 @@
 [package]
 name = "c-cli"
 version = "0.1.0"
-authors = ["Petter K <ptrkrlsrd@users.noreply.github.com>"]
+authors = ["Petter K <ermines-bookie-0l@icloud.com>"]
 description = "cat and ls combined into one command"
 edition = "2018"
 license = "Apache-2.0"
