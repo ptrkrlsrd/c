@@ -1,5 +1,5 @@
 [package]
-name = "c"
+name = "c-cli"
 version = "0.1.0"
 authors = ["Petter K <ptrkrlsrd@users.noreply.github.com>"]
 description = "cat and ls combined into one command"
@@ -7,3 +7,8 @@ edition = "2018"
 license = "Apache-2.0"
 
 [dependencies]
+
+
+[[bin]]
+name = "c"
+path = "src/main.rs"
