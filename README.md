@@ -10,6 +10,12 @@ This CLI program emulates the basic functionality of the `ls` command found in U
 c
 ```
 
+or
+
+```
+c {foldername}
+```
+
 * Show file content like `cat`. You can also specify multiple files
 ```
 c {filename}
