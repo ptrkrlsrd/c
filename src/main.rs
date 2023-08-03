@@ -18,29 +18,39 @@ fn read_file(path: &Path) {
     }
 }
 
-fn read_single_file(arg: &String) {
+fn handle_single_argument(arg: &String) {
     let path = Path::new(arg.as_str());
-    if path.exists() && path.is_file() {
+    if !path.exists() {
+        return;
+    }
+
+    if path.is_file() {
         read_file(path);
+    } else if path.is_dir() {
+        read_directory(arg.as_str()).unwrap();
     }
 }
 
-fn read_multiple_files(args: &Vec<String>) {
+fn handle_multiple_arguments(args: &Vec<String>) {
     args.into_iter().for_each(|i| {
-        read_single_file(i);
+        handle_single_argument(i);
     });
 }
 
-fn print_files_in_cwd() -> io::Result<()> {
-    let entries = fs::read_dir(".")?;
-    for entry in entries {
+fn handle_no_argument() -> io::Result<()> {
+    read_directory(".")?;
+    Ok(())
+}
+
+fn read_directory(path: &str) -> Result<(), io::Error> {
+    let entries = fs::read_dir(path)?;
+    Ok(for entry in entries {
         let entry = entry?;
         let path = entry.path();
         if path.is_file() {
             println!("{}", entry.file_name().to_string_lossy());
         }
-    }
-    Ok(())
+    })
 }
 
 fn handle_args(args: env::Args) {
@@ -49,9 +59,9 @@ fn handle_args(args: env::Args) {
     let last = arg_list.last().unwrap();
 
     match arg_list.len() {
-        1 => print_files_in_cwd().unwrap(),
-        2 => read_single_file(&last),
-        _ => read_multiple_files(&arg_list[1..].to_vec()),
+        1 => handle_no_argument().unwrap(),
+        2 => handle_single_argument(&last),
+        _ => handle_multiple_arguments(&arg_list[1..].to_vec()),
     }
 }
 
