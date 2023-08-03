@@ -1,22 +1,19 @@
-use std::fs::{File, self};
-use std::io::{prelude::*, self};
-use std::path::Path;
 use std::env;
-
+use std::fs::{self, File};
+use std::io::{self, prelude::*};
+use std::path::Path;
 
 fn read_file(path: &Path) {
     let display = path.display();
 
     let mut file = match File::open(&path) {
-        Err(why) => panic!("couldn't open {}: {}", display,
-                                                   why.to_string()),
+        Err(why) => panic!("couldn't open {}: {}", display, why.to_string()),
         Ok(file) => file,
     };
-    
+
     let mut s = String::new();
     match file.read_to_string(&mut s) {
-        Err(why) => panic!("couldn't read {}: {}", display,
-                                                   why.to_string()),
+        Err(why) => panic!("couldn't read {}: {}", display, why.to_string()),
         Ok(_) => print!("{}", s),
     }
 }
@@ -47,14 +44,14 @@ fn print_files_in_cwd() -> io::Result<()> {
 }
 
 fn handle_args(args: env::Args) {
-    let a: Vec<String> = args.collect();
+    let arg_list: Vec<String> = args.collect();
 
-    let last = a.last();
+    let last = arg_list.last();
 
-    match a.len() {
+    match arg_list.len() {
         1 => print_files_in_cwd().unwrap(),
         2 => read_single_file(&last.unwrap()),
-        _ => read_multiple_files(&a[1..].to_vec()),
+        _ => read_multiple_files(&arg_list[1..].to_vec()),
     }
 }
 
@@ -62,4 +59,3 @@ fn main() {
     let args: env::Args = env::args();
     handle_args(args);
 }
-
