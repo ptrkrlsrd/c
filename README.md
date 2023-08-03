@@ -30,6 +30,3 @@ These instructions will get you a copy of the project up and running on your loc
 ```bash
 cargo install ...
 ```
-
-## Built With
-- [Rust](https://www.rust-lang.org/)
