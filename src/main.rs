@@ -7,14 +7,14 @@ fn read_file(path: &Path) {
     let display = path.display();
 
     let mut file = match File::open(&path) {
-        Err(why) => panic!("couldn't open {}: {}", display, why.to_string()),
+        Err(err) => panic!("couldn't open {}: {}", display, err.to_string()),
         Ok(file) => file,
     };
 
-    let mut s = String::new();
-    match file.read_to_string(&mut s) {
-        Err(why) => panic!("couldn't read {}: {}", display, why.to_string()),
-        Ok(_) => print!("{}", s),
+    let mut file_content = String::new();
+    match file.read_to_string(&mut file_content) {
+        Err(err) => panic!("couldn't read {}: {}", display, err.to_string()),
+        Ok(_) => print!("{}", file_content),
     }
 }
 
