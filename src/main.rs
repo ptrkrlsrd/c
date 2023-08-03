@@ -37,7 +37,7 @@ fn print_files_in_cwd() -> io::Result<()> {
         let entry = entry?;
         let path = entry.path();
         if path.is_file() {
-            println!("{}", path.display());
+            println!("{}", entry.file_name().to_string_lossy());
         }
     }
     Ok(())
@@ -46,11 +46,11 @@ fn print_files_in_cwd() -> io::Result<()> {
 fn handle_args(args: env::Args) {
     let arg_list: Vec<String> = args.collect();
 
-    let last = arg_list.last();
+    let last = arg_list.last().unwrap();
 
     match arg_list.len() {
         1 => print_files_in_cwd().unwrap(),
-        2 => read_single_file(&last.unwrap()),
+        2 => read_single_file(&last),
         _ => read_multiple_files(&arg_list[1..].to_vec()),
     }
 }
