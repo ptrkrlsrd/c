@@ -1,6 +1,6 @@
 [package]
 name = "c-cli"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Petter K <ermines-bookie-0l@icloud.com>"]
 description = "cat and ls combined into one command"
 edition = "2018"
