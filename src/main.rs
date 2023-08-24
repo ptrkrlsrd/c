@@ -1,7 +1,26 @@
 use std::env;
+use std::error::Error;
+use std::fmt::{self, Display};
 use std::fs::{self, File};
 use std::io::{self, prelude::*};
 use std::path::Path;
+
+#[derive(Debug)]
+struct PathError(String);
+
+impl Display for PathError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
+
+impl Error for PathError {}
+
+impl From<io::Error> for PathError {
+    fn from(error: io::Error) -> Self {
+        PathError(error.to_string())
+    }
+}
 
 fn read_file(path: &Path) -> io::Result<()> {
     let mut file = File::open(&path)?;
@@ -11,10 +30,10 @@ fn read_file(path: &Path) -> io::Result<()> {
     Ok(())
 }
 
-fn handle_single_argument(arg: &String) -> io::Result<()> {
+fn handle_single_argument(arg: &String) -> Result<(), PathError> {
     let path = Path::new(arg.as_str());
     if !path.exists() {
-        return Ok(());
+        return Err(PathError(format!("'{}' does not exist", arg).into()));
     }
 
     if path.is_file() {
@@ -25,7 +44,7 @@ fn handle_single_argument(arg: &String) -> io::Result<()> {
     Ok(())
 }
 
-fn handle_multiple_arguments(args: &[String]) -> io::Result<()> {
+fn handle_multiple_arguments(args: &[String]) -> Result<(), PathError> {
     for arg in args {
         handle_single_argument(arg)?;
     }
@@ -49,7 +68,7 @@ fn read_directory(path: &str) -> io::Result<()> {
     Ok(())
 }
 
-fn handle_args(args: env::Args) -> io::Result<()> {
+fn handle_args(args: env::Args) -> Result<(), PathError> {
     let arg_list: Vec<String> = args.collect();
 
     match arg_list.len() {
