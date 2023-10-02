@@ -63,8 +63,11 @@ fn read_directory(path: &str) -> io::Result<()> {
         let path = entry.path();
         if path.is_file() {
             println!("{}", entry.file_name().to_string_lossy());
+        } else if path.is_dir() {
+            println!("{}", entry.file_name().to_string_lossy());
         }
     }
+    io::stdout().flush()?;
     Ok(())
 }
 
