@@ -1,4 +1,4 @@
-# C-Util
+# C
 ## Unified `cat` & `ls` Functionality in a Single CLI Tool
 
 Unveil the next level of command-line efficiency with Command-C. It's the all-in-one utility that effortlessly merges ls's directory listing and cat's file reading capabilities. Manage files and explore directories with ease, all through a single, powerful command. Note that the tool is not feature aligned with eiter ls nor cat, but I plan to add the most useful flags later.
