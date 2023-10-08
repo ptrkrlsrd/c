@@ -1,28 +1,26 @@
-# C
-## cat and ls combined into one command
+# C-Util
+## Unified `cat` & `ls` Functionality in a Single CLI Tool
 
-This CLI program emulates the basic functionality of the `ls` command found in Unix-like systems combined with `cat`. It lists the names of all files and directories in the current directory as well as showing the file content of the specified file.
+Unveil the next level of command-line efficiency with Command-C. It's the all-in-one utility that effortlessly merges ls's directory listing and cat's file reading capabilities. Manage files and explore directories with ease, all through a single, powerful command. Note that the tool is not feature aligned with eiter ls nor cat, but I plan to add the most useful flags later.
 
-## Installing
+## Quick Installation
 
 ```bash
 cargo install c-cli
 ```
 
-## Usage
+## Features & Usage
 
-* List files in current directory, just like `ls`
-```
+* **Directory Listing**: Similar to `ls`, list all files and directories in the current folder.
+```bash
 c
 ```
-
-or
-
-```
+or specify a target folder:
+```bash
 c {foldername}
 ```
 
-* Show file content like `cat`. You can also specify multiple files
-```
+* **File Content Display**: Like `cat`, read the content of specified files. Supports multiple file arguments.
+```bash
 c {filename}
 ```
